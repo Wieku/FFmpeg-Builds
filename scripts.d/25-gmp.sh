@@ -4,7 +4,7 @@ SCRIPT_REPO="https://gmplib.org/repo/gmp/"
 SCRIPT_HGREV="d337756619a0"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

@@ -4,7 +4,7 @@ SCRIPT_REPO="https://github.com/fribidi/fribidi.git"
 SCRIPT_COMMIT="6428d8469e536bcbb6e12c7b79ba6659371c435a"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

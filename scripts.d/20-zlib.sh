@@ -4,7 +4,7 @@ SCRIPT_REPO="https://github.com/madler/zlib.git"
 SCRIPT_COMMIT="21767c654d31d2dccdde4330529775c6c5fd5389"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

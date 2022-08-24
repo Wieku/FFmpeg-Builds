@@ -5,7 +5,7 @@ SCRIPT_COMMIT="61c603f3baa5270e04bcfb6acf83c654e3c57679"
 
 ffbuild_enabled() {
     [[ $ADDINS_STR == *4.4* ]] && return -1
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

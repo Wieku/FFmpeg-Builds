@@ -6,7 +6,7 @@ SCRIPT_COMMIT="619564efbf84199f87e1a3047da00b600208fca2"
 ffbuild_enabled() {
     # Dependency of GPL-Only librubberband
     [[ $VARIANT == lgpl* ]] && return -1
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

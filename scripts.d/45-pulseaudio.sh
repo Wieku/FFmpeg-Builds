@@ -4,8 +4,8 @@ SCRIPT_REPO="https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git"
 SCRIPT_COMMIT="8188b49bed7be08e23abcf92b098f62c1fc5c2ec"
 
 ffbuild_enabled() {
-    [[ $TARGET == linux* ]] || return 1
-    return 0
+    [[ $TARGET == linux* ]] || return -1
+    return -1
 }
 
 ffbuild_dockerbuild() {

@@ -4,7 +4,7 @@ SCRIPT_REPO="https://github.com/uclouvain/openjpeg.git"
 SCRIPT_COMMIT="be95561917aa9b1d8ea4614820a534917cfa6bbe"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

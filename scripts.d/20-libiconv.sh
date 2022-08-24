@@ -4,7 +4,7 @@ SCRIPT_REPO="https://git.savannah.gnu.org/git/libiconv.git"
 SCRIPT_COMMIT="2582e7bb06f1638877713400e2d11db547798a49"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

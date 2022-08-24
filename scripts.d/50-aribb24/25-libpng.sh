@@ -4,7 +4,7 @@ SCRIPT_REPO="https://github.com/glennrp/libpng.git"
 SCRIPT_COMMIT="a37d4836519517bdce6cb9d956092321eca3e73b"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

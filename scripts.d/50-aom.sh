@@ -4,7 +4,7 @@ SCRIPT_REPO="https://aomedia.googlesource.com/aom"
 SCRIPT_COMMIT="b86730bfae5c9d3f09cd709d8a852da31641b2fa"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerstage() {

@@ -5,7 +5,7 @@ SCRIPT_COMMIT="6e24fb7f5f7438bb04061dc1a159f0c5b882d847"
 
 ffbuild_enabled() {
     [[ $TARGET == win32 ]] && return -1
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

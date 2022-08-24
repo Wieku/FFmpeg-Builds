@@ -5,7 +5,7 @@ SCRIPT_COMMIT="OpenSSL_1_1_1q"
 SCRIPT_TAGFILTER="OpenSSL_1_1_1*"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

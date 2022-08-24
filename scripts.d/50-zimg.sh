@@ -4,7 +4,7 @@ SCRIPT_REPO="https://github.com/sekrit-twc/zimg.git"
 SCRIPT_COMMIT="afae03a94937cc6c84da93f7de815ec0a9e52089"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

@@ -6,7 +6,7 @@ SCRIPT_COMMIT_PINNED="e7715fcf329573cdcff5c57d0e4a25f4c3a0cb7f"
 
 ffbuild_enabled() {
     [[ $VARIANT == lgpl* ]] && return -1
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

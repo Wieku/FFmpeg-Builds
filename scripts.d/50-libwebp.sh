@@ -4,7 +4,7 @@ SCRIPT_REPO="https://chromium.googlesource.com/webm/libwebp"
 SCRIPT_COMMIT="9b902cbacedd0fb19de5ce4475d7a8345d7fe9cf"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

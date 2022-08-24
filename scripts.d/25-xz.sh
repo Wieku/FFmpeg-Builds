@@ -4,7 +4,7 @@ SCRIPT_REPO="https://github.com/xz-mirror/xz.git"
 SCRIPT_COMMIT="4773608554d1b684a05ff9c1d879cf5c42266d33"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

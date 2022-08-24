@@ -5,7 +5,7 @@ SCRIPT_COMMIT="e314946813bcb96e8baedc1a290c48a2aa6ef162"
 
 ffbuild_enabled() {
     [[ $TARGET != linux* ]] && return -1
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

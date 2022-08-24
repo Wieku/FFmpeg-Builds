@@ -4,7 +4,7 @@ SCRIPT_REPO="https://gitlab.freedesktop.org/fontconfig/fontconfig.git"
 SCRIPT_COMMIT="fd0753af88f746fd3d729bf6e1df08eefeeaa3ac"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

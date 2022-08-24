@@ -4,7 +4,7 @@ SCRIPT_REPO="https://bitbucket.org/mpyne/game-music-emu.git"
 SCRIPT_COMMIT="6cd4bdb69be304f58c9253fb08b8362f541b3b4b"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {
