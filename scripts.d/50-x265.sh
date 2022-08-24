@@ -22,43 +22,43 @@ ffbuild_dockerbuild() {
         -DCMAKE_ASM_NASM_FLAGS=-w-macro-params-legacy
     )
 
-    if [[ $TARGET != *32 ]]; then
-        mkdir 8bit 10bit 12bit
-        cmake "${common_config[@]}" -DHIGH_BIT_DEPTH=ON -DEXPORT_C_API=OFF -DENABLE_HDR10_PLUS=ON -DMAIN12=ON -S source -B 12bit &
-        cmake "${common_config[@]}" -DHIGH_BIT_DEPTH=ON -DEXPORT_C_API=OFF -DENABLE_HDR10_PLUS=ON -S source -B 10bit &
-        cmake "${common_config[@]}" -DEXTRA_LIB="x265_main10.a;x265_main12.a" -DEXTRA_LINK_FLAGS=-L. -DLINKED_10BIT=ON -DLINKED_12BIT=ON -S source -B 8bit &
-        wait
-
-        cat >Makefile <<"EOF"
-all: 12bit/libx265.a 10bit/libx265.a 8bit/libx265.a
-
-%/libx265.a:
-	$(MAKE) -C $(subst /libx265.a,,$@)
-
-.PHONY: all
-EOF
-
-        make -j$(nproc)
-
-        cd 8bit
-        mv ../12bit/libx265.a ../8bit/libx265_main12.a
-        mv ../10bit/libx265.a ../8bit/libx265_main10.a
-        mv libx265.a libx265_main.a
-
-        ${FFBUILD_CROSS_PREFIX}ar -M <<EOF
-CREATE libx265.a
-ADDLIB libx265_main.a
-ADDLIB libx265_main10.a
-ADDLIB libx265_main12.a
-SAVE
-END
-EOF
-    else
+#    if [[ $TARGET != *32 ]]; then
+#        mkdir 8bit 10bit 12bit
+#        cmake "${common_config[@]}" -DHIGH_BIT_DEPTH=ON -DEXPORT_C_API=OFF -DENABLE_HDR10_PLUS=ON -DMAIN12=ON -S source -B 12bit &
+#        cmake "${common_config[@]}" -DHIGH_BIT_DEPTH=ON -DEXPORT_C_API=OFF -DENABLE_HDR10_PLUS=ON -S source -B 10bit &
+#        cmake "${common_config[@]}" -DEXTRA_LIB="x265_main10.a;x265_main12.a" -DEXTRA_LINK_FLAGS=-L. -DLINKED_10BIT=ON -DLINKED_12BIT=ON -S source -B 8bit &
+#        wait
+#
+#        cat >Makefile <<"EOF"
+#all: 12bit/libx265.a 10bit/libx265.a 8bit/libx265.a
+#
+#%/libx265.a:
+#	$(MAKE) -C $(subst /libx265.a,,$@)
+#
+#.PHONY: all
+#EOF
+#
+#        make -j$(nproc)
+#
+#        cd 8bit
+#        mv ../12bit/libx265.a ../8bit/libx265_main12.a
+#        mv ../10bit/libx265.a ../8bit/libx265_main10.a
+#        mv libx265.a libx265_main.a
+#
+#        ${FFBUILD_CROSS_PREFIX}ar -M <<EOF
+#CREATE libx265.a
+#ADDLIB libx265_main.a
+#ADDLIB libx265_main10.a
+#ADDLIB libx265_main12.a
+#SAVE
+#END
+#EOF
+#    else
         mkdir 8bit
         cd 8bit
-        cmake "${common_config[@]}" ../source
+        cmake "${common_config[@]}" -DHIGH_BIT_DEPTH=OFF ../source
         make -j$(nproc)
-    fi
+#    fi
 
     make install
 

@@ -18,6 +18,7 @@ ffbuild_dockerbuild() {
         --enable-pic
         --disable-lavf
         --disable-swscale
+        --bit-depth=8
         --prefix="$FFBUILD_PREFIX"
     )
 
