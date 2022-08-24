@@ -3,7 +3,7 @@
 SCRIPT_SKIP="1"
 
 ffbuild_enabled() {
-    [[ $TARGET == win* ]]
+    #[[ $TARGET == win* ]]
     return -1
 }
 
