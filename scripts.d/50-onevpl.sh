@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/oneapi-src/oneVPL.git"
-SCRIPT_COMMIT="2232af4cdb13c0018d965c3b040466ad89b1922b"
+SCRIPT_COMMIT="8b69f025de671b7bf97464f0e7fd7e2c5932dab7"
 
 ffbuild_enabled() {
     [[ $TARGET == *arm64 ]] && return -1
@@ -32,7 +32,7 @@ ffbuild_dockerbuild() {
 }
 
 ffbuild_configure() {
-    [[ $ADDINS_STR == *onevpl* ]] && echo --enable-libvpl
+    echo --enable-libvpl
 }
 
 ffbuild_unconfigure() {
