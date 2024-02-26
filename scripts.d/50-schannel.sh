@@ -4,6 +4,7 @@ SCRIPT_SKIP="1"
 
 ffbuild_enabled() {
     [[ $TARGET == win* ]]
+    retrun -1
 }
 
 ffbuild_dockerdl() {

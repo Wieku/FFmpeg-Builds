@@ -5,7 +5,7 @@ SCRIPT_COMMIT="openssl-3.0.13"
 SCRIPT_TAGFILTER="openssl-3.0.*"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerdl() {

@@ -5,7 +5,7 @@ SCRIPT_COMMIT="716f4394641d53f0d79c9ddac3fa93b03a49f278"
 
 ffbuild_enabled() {
     [[ $VARIANT == nonfree* ]] || return -1
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

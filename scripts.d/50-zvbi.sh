@@ -4,7 +4,7 @@ SCRIPT_REPO="https://svn.code.sf.net/p/zapping/svn/trunk/vbi"
 SCRIPT_REV="4270"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerstage() {

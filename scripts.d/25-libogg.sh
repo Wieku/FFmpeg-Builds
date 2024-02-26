@@ -4,7 +4,7 @@ SCRIPT_REPO="https://github.com/xiph/ogg.git"
 SCRIPT_COMMIT="db5c7a49ce7ebda47b15b78471e78fb7f2483e22"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

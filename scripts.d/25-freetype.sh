@@ -4,7 +4,7 @@ SCRIPT_REPO="https://gitlab.freedesktop.org/freetype/freetype.git"
 SCRIPT_COMMIT="47574f7ea445c8bb751da0fa716424c9c29a6807"
 
 ffbuild_enabled() {
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {
