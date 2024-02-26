@@ -21,7 +21,7 @@ FF_CONFIGURE="--enable-gpl --enable-version3 --disable-debug
 --enable-muxer=mov,rawvideo,mp4,matroska,mp3,flac,ogg,null
 
 --disable-protocols
---enable-protocol=file,pipe"
+--enable-protocol=file,pipe,fd"
 FF_CFLAGS=""
 FF_CXXFLAGS=""
 FF_LDFLAGS=""
