@@ -9,7 +9,7 @@ FF_CONFIGURE="--enable-gpl --enable-version3 --disable-debug
 --enable-amf
 
 --disable-decoders
---enable-decoder=h263,flv,h264,hevc,mjpeg,vp9,rawvideo,pcm_f32le,pcm_f32be
+--enable-decoder=h263,flv,h264,hevc,mjpeg,vp9,rawvideo,pcm_f32le,pcm_f32be,wrapped_avframe
 
 --disable-encoders
 --enable-encoder=libx264,libx265,h264_nvenc,hevc_nvenc,av1_nvenc,h264_qsv,hevc_qsv,h264_amf,hevc_amf,aac,libmp3lame,libopus,flac,rawvideo
