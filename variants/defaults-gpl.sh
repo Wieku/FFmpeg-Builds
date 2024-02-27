@@ -6,7 +6,6 @@ FF_CONFIGURE="--enable-gpl --enable-version3 --disable-debug
 
 --enable-nvenc
 --enable-amf
---enable-mfx
 
 --disable-decoders
 --enable-decoder=h263,flv,h264,hevc,mjpeg,vp9,rawvideo,pcm_f32le,pcm_f32be,wrapped_avframe
