@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SCRIPT_REPO="https://github.com/oneapi-src/oneVPL.git"
-SCRIPT_COMMIT="18e890e7a5d6355306b8f1046b46c378ced453ff"
+SCRIPT_REPO="https://github.com/intel/libvpl.git"
+SCRIPT_COMMIT="80ea0a5ebd25743c1cfe973e803245ba67d53b20"
 
 ffbuild_enabled() {
     [[ $TARGET == *arm64 ]] && return -1
@@ -24,6 +24,8 @@ ffbuild_dockerbuild() {
     ninja install
 
     rm -rf "$FFBUILD_PREFIX"/{etc,share}
+
+    echo "Libs.private: -lstdc++" >> "$FFBUILD_PREFIX"/lib/pkgconfig/vpl.pc
 }
 
 ffbuild_configure() {

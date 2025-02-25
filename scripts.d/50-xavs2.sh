@@ -7,7 +7,7 @@ ffbuild_enabled() {
     [[ $VARIANT == lgpl* ]] && return -1
     [[ $TARGET == win32 ]] && return -1
     # xavs2 aarch64 support is broken
-    [[ $TARGET == linuxarm64 ]] && return -1
+    [[ $TARGET == *arm64 ]] && return -1
     return -1
 }
 
@@ -29,6 +29,7 @@ ffbuild_dockerbuild() {
         --disable-gpac
         --disable-lsmash
         --extra-asflags="-w-macro-params-legacy"
+        --extra-cflags="-Wno-error=incompatible-pointer-types"
         --prefix="$FFBUILD_PREFIX"
     )
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/xiph/rav1e.git"
-SCRIPT_COMMIT="1412bed6b9cd54a46096b8aaf33557e5b740e4f8"
+SCRIPT_COMMIT="62b4888672aa5c1c8084a8114f999c0699e08080"
 
 ffbuild_enabled() {
     [[ $TARGET == win32 ]] && return -1
@@ -10,34 +10,31 @@ ffbuild_enabled() {
 
 ffbuild_dockerbuild() {
     local myconf=(
-        --prefix="$FFBUILD_PREFIX"
+        --prefix="${FFBUILD_PREFIX}"
+        --target="${FFBUILD_RUST_TARGET}"
         --library-type=staticlib
         --crt-static
         --release
     )
 
-    if [[ -n "$FFBUILD_RUST_TARGET" ]]; then
-        unset PKG_CONFIG_LIBDIR
+    # Pulls in target-libs for host tool builds otherwise.
+    # Luckily no target libraries are needed.
+    unset PKG_CONFIG_LIBDIR
 
-        export CC="gcc"
-        export CXX="g++"
-        export TARGET_CC="${FFBUILD_CROSS_PREFIX}gcc"
-        export TARGET_CXX="${FFBUILD_CROSS_PREFIX}g++"
-        export CROSS_COMPILE=1
-        export TARGET_CFLAGS="$CFLAGS"
-        export TARGET_CXXFLAGS="$CFLAGS"
-        unset CFLAGS
-        unset CXXFLAGS
+    # The pinned version is broken, and upstream does not react
+    cargo update cc
 
-        myconf+=(
-            --target="$FFBUILD_RUST_TARGET"
-        )
-        cat <<EOF >$CARGO_HOME/config.toml
-[target.$FFBUILD_RUST_TARGET]
-linker = "${FFBUILD_CROSS_PREFIX}gcc"
-ar = "${FFBUILD_CROSS_PREFIX}ar"
-EOF
-    fi
+    export "AR_${FFBUILD_RUST_TARGET//-/_}"="${AR}"
+    export "RANLIB_${FFBUILD_RUST_TARGET//-/_}"="${RANLIB}"
+    export "NM_${FFBUILD_RUST_TARGET//-/_}"="${NM}"
+    export "LD_${FFBUILD_RUST_TARGET//-/_}"="${LD}"
+    export "CC_${FFBUILD_RUST_TARGET//-/_}"="${CC}"
+    export "CXX_${FFBUILD_RUST_TARGET//-/_}"="${CXX}"
+    export "LD_${FFBUILD_RUST_TARGET//-/_}"="${LD}"
+    export "CFLAGS_${FFBUILD_RUST_TARGET//-/_}"="${CFLAGS}"
+    export "CXXFLAGS_${FFBUILD_RUST_TARGET//-/_}"="${CXXFLAGS}"
+    export "LDFLAGS_${FFBUILD_RUST_TARGET//-/_}"="${LDFLAGS}"
+    unset AR RANLIB NM CC CXX LD CFLAGS CXXFLAGS LDFLAGS
 
     cargo cinstall -v "${myconf[@]}"
 
