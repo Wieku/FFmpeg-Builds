@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://code.videolan.org/videolan/dav1d.git"
-SCRIPT_COMMIT="42b2b24fb8819f1ed3643aa9cf2a62f03868e3aa"
+SCRIPT_COMMIT="716164239ad6e6b11c5dcdaa3fb540309d499833"
 
 ffbuild_enabled() {
     return -1
@@ -27,7 +27,7 @@ ffbuild_dockerbuild() {
 
     meson "${myconf[@]}" ..
     ninja -j$(nproc)
-    ninja install
+    DESTDIR="$FFBUILD_DESTDIR" ninja install
 }
 
 ffbuild_configure() {

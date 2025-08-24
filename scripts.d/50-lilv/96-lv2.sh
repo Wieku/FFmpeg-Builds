@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/lv2/lv2.git"
-SCRIPT_COMMIT="3e1e609d89fb1954bd497ae8021a3b6c0aad31f6"
+SCRIPT_COMMIT="961ed4e5ce11af6ceb4bdc39944133173619055c"
 
 ffbuild_enabled() {
     return -1
@@ -31,5 +31,5 @@ ffbuild_dockerbuild() {
 
     meson "${myconf[@]}" ..
     ninja -j"$(nproc)"
-    ninja install
+    DESTDIR="$FFBUILD_DESTDIR" ninja install
 }

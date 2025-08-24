@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://gitlab.freedesktop.org/xorg/lib/libxfixes.git"
-SCRIPT_COMMIT="c1cab28e27dd1c5a81394965248b57e490ccf2ca"
+SCRIPT_COMMIT="109430d6ef31fb83872f30e51a1d9ed911442dbf"
 
 ffbuild_enabled() {
     [[ $TARGET != linux* ]] && return -1
@@ -32,8 +32,8 @@ ffbuild_dockerbuild() {
 
     ./configure "${myconf[@]}"
     make -j$(nproc)
-    make install
+    make install DESTDIR="$FFBUILD_DESTDIR"
 
-    gen-implib "$FFBUILD_PREFIX"/lib/{libXfixes.so.3,libXfixes.a}
-    rm "$FFBUILD_PREFIX"/lib/libXfixes{.so*,.la}
+    gen-implib "$FFBUILD_DESTPREFIX"/lib/{libXfixes.so.3,libXfixes.a}
+    rm "$FFBUILD_DESTPREFIX"/lib/libXfixes{.so*,.la}
 }

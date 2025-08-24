@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/madler/zlib.git"
-SCRIPT_COMMIT="ed1610791c0c681ee562bb3997e0f29bfae11b2d"
+SCRIPT_COMMIT="5a82f71ed1dfc0bec044d9702463dbdf84ea3b71"
 
 ffbuild_enabled() {
     return -1
@@ -15,7 +15,7 @@ ffbuild_dockerbuild() {
 
     ./configure "${myconf[@]}"
     make -j$(nproc)
-    make install
+    make install DESTDIR="$FFBUILD_DESTDIR"
 }
 
 ffbuild_configure() {

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/cisco/openh264.git"
-SCRIPT_COMMIT="cf3b514ba34a3a6c4f14b3ae8714325dd30bfa08"
+SCRIPT_COMMIT="0c9a557a9a6f1d267c4d372221669a8ae69ccda0"
 
 ffbuild_enabled() {
     return -1
@@ -49,7 +49,7 @@ ffbuild_dockerbuild() {
         return -1
     fi
 
-    make -j$(nproc) "${myconf[@]}" install-static
+    make -j$(nproc) "${myconf[@]}" install-static DESTDIR="$FFBUILD_DESTDIR"
 }
 
 ffbuild_configure() {

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://gitlab.freedesktop.org/xorg/lib/libxinerama.git"
-SCRIPT_COMMIT="51c28095951676a5896437c4c3aa40fb1972bad2"
+SCRIPT_COMMIT="cc22c2f60c3862482562955116d5455263b443dc"
 
 ffbuild_enabled() {
     [[ $TARGET != linux* ]] && return -1
@@ -38,8 +38,8 @@ ffbuild_dockerbuild() {
 
     ./configure "${myconf[@]}"
     make -j$(nproc)
-    make install
+    make install DESTDIR="$FFBUILD_DESTDIR"
 
-    gen-implib "$FFBUILD_PREFIX"/lib/{libXinerama.so.1,libXinerama.a}
-    rm "$FFBUILD_PREFIX"/lib/libXinerama{.so*,.la}
+    gen-implib "$FFBUILD_DESTPREFIX"/lib/{libXinerama.so.1,libXinerama.a}
+    rm "$FFBUILD_DESTPREFIX"/lib/libXinerama{.so*,.la}
 }

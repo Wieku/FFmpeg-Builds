@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/lv2/lilv.git"
-SCRIPT_COMMIT="63b0e7c87dd0fa0b6f3c5dc0f75fb616a5a57ee1"
+SCRIPT_COMMIT="5871749d14c3d93a2b708c96cf1c2582aed9a73e"
 
 ffbuild_enabled() {
     return -1
@@ -31,7 +31,7 @@ ffbuild_dockerbuild() {
 
     meson "${myconf[@]}" ..
     ninja -j"$(nproc)"
-    ninja install
+    DESTDIR="$FFBUILD_DESTDIR" ninja install
 }
 
 ffbuild_configure() {

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/drobilla/zix.git"
-SCRIPT_COMMIT="7d2b7d3b00f3f938f8b242ca6dba5acc01e19dbc"
+SCRIPT_COMMIT="a970ac9c1fa1341b83f2b1a4a1740590ec2cbfe7"
 
 ffbuild_enabled() {
     return -1
@@ -31,5 +31,5 @@ ffbuild_dockerbuild() {
 
     meson "${myconf[@]}" ..
     ninja -j"$(nproc)"
-    ninja install
+    DESTDIR="$FFBUILD_DESTDIR" ninja install
 }

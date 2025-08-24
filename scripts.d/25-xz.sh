@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/tukaani-project/xz.git"
-SCRIPT_COMMIT="353c33355cb12e5016d49052fd1e90d15568aa37"
+SCRIPT_COMMIT="dd4a1b259936880e04669b43e778828b60619860"
 
 ffbuild_enabled() {
     return -1
@@ -29,7 +29,7 @@ ffbuild_dockerbuild() {
 
     ./configure "${myconf[@]}"
     make -j$(nproc)
-    make install
+    make install DESTDIR="$FFBUILD_DESTDIR"
 }
 
 ffbuild_configure() {
