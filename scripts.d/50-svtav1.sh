@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://gitlab.com/AOMediaCodec/SVT-AV1.git"
-SCRIPT_COMMIT="380af5574f9b47665a931b763247f80f91feab9e"
+SCRIPT_COMMIT="5ed9ffbcb5086da23f30fe9bc5b00145358462da"
 
 ffbuild_enabled() {
     [[ $TARGET == win32 ]] && return -1
@@ -27,5 +27,6 @@ ffbuild_configure() {
 }
 
 ffbuild_unconfigure() {
+    (( $(ffbuild_ffver) >= 404 )) || return 0
     echo --disable-libsvtav1
 }

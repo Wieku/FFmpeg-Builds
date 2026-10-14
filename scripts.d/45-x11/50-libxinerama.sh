@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://gitlab.freedesktop.org/xorg/lib/libxinerama.git"
-SCRIPT_COMMIT="cc22c2f60c3862482562955116d5455263b443dc"
+SCRIPT_COMMIT="d7162b962710bc724b41cabab4e7cea303c4b541"
 
 ffbuild_enabled() {
     [[ $TARGET != linux* ]] && return -1
@@ -34,7 +34,7 @@ ffbuild_dockerbuild() {
     fi
 
     export CFLAGS="$RAW_CFLAGS"
-    export LDFLAFS="$RAW_LDFLAGS"
+    export LDFLAGS="$RAW_LDFLAGS"
 
     ./configure "${myconf[@]}"
     make -j$(nproc)

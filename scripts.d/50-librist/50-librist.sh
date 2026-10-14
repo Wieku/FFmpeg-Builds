@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://code.videolan.org/rist/librist.git"
-SCRIPT_COMMIT="1a5013b59ce098465e835a0510cd395872bb1c24"
+SCRIPT_COMMIT="4f45ef8f78983892d52ccd52d9f675435b23738f"
 
 ffbuild_enabled() {
     return -1
@@ -47,5 +47,6 @@ ffbuild_configure() {
 }
 
 ffbuild_unconfigure() {
+    (( $(ffbuild_ffver) >= 404 )) || return 0
     echo --disable-librist
 }

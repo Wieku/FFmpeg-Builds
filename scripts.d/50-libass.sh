@@ -1,25 +1,45 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/libass/libass.git"
-SCRIPT_COMMIT="338fd2cea8ac156a910b04838b5f40b868e41160"
+SCRIPT_COMMIT="f61db567e6593df3470e91594bcd4ad2d0473aff"
+
+ffbuild_depends() {
+    echo base
+    echo fonts
+    echo fribidi
+    echo libiconv
+    echo libunibreak
+}
 
 ffbuild_enabled() {
     return -1
 }
 
 ffbuild_dockerbuild() {
-    ./autogen.sh
+    mkdir build && cd build
 
     local myconf=(
         --prefix="$FFBUILD_PREFIX"
-        --disable-shared
-        --enable-static
-        --with-pic
+        --buildtype=release
+        --default-library=static
+        -Dtest=disabled
+        -Dcompare=disabled
+        -Dprofile=disabled
+        -Dfuzz=disabled
+        -Dcheckasm=disabled
+        -Dfontconfig=enabled
+        -Dasm=enabled
+        -Dlibunibreak=enabled
     )
 
-    if [[ $TARGET == win* || $TARGET == linux* ]]; then
+    if [[ $TARGET == win* ]]; then
         myconf+=(
-            --host="$FFBUILD_TOOLCHAIN"
+            -Ddirectwrite=enabled
+            --cross-file=/cross.meson
+        )
+    elif [[ $TARGET == linux* ]]; then
+        myconf+=(
+            --cross-file=/cross.meson
         )
     else
         echo "Unknown target"
@@ -28,9 +48,9 @@ ffbuild_dockerbuild() {
 
     export CFLAGS="$CFLAGS -Dread_file=libass_internal_read_file"
 
-    ./configure "${myconf[@]}"
-    make -j$(nproc)
-    make install DESTDIR="$FFBUILD_DESTDIR"
+    meson setup "${myconf[@]}" ..
+    ninja -j$(nproc)
+    DESTDIR="$FFBUILD_DESTDIR" ninja install
 }
 
 ffbuild_configure() {

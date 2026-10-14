@@ -1,7 +1,12 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/zapping-vbi/zvbi"
-SCRIPT_COMMIT="5169a428d51c3ae8ff7b0897e8a687d8e05e37b5"
+SCRIPT_COMMIT="d3a5ee9f2b047bf16cd1ee5ccf6ec05ee75409d0"
+
+ffbuild_depends() {
+    echo base
+    echo libiconv
+}
 
 ffbuild_enabled() {
     return -1

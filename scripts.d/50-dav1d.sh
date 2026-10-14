@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://code.videolan.org/videolan/dav1d.git"
-SCRIPT_COMMIT="716164239ad6e6b11c5dcdaa3fb540309d499833"
+SCRIPT_COMMIT="9711965b60bb692ae24004659acf61f5c7d9ed61"
 
 ffbuild_enabled() {
     return -1
@@ -35,5 +35,6 @@ ffbuild_configure() {
 }
 
 ffbuild_unconfigure() {
+    (( $(ffbuild_ffver) >= 404 )) || return 0
     echo --disable-libdav1d
 }

@@ -1,12 +1,18 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/ggml-org/whisper.cpp.git"
-SCRIPT_COMMIT="5527454cdb3e15d7e2b8a6e2afcb58cb61651fd2"
+SCRIPT_COMMIT="a44e07845931421bb6f3447ce0010ed9dc76a118"
+
+ffbuild_depends() {
+    echo base
+    echo vulkan
+    echo opencl
+}
 
 ffbuild_enabled() {
     [[ $TARGET != *32 ]] || return -1
     (( $(ffbuild_ffver) >= 800 )) || return -1
-    return 0
+    return -1
 }
 
 ffbuild_dockerbuild() {

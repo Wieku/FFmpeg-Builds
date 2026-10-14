@@ -2,8 +2,14 @@
 
 SCRIPT_SKIP="1"
 
+ffbuild_depends() {
+    echo mingw
+    echo mingw-std-threads
+    echo xorg-macros
+}
+
 ffbuild_enabled() {
-    [[ $TARGET == linux* ]]
+    return 0
 }
 
 ffbuild_dockerfinal() {
@@ -11,7 +17,7 @@ ffbuild_dockerfinal() {
 }
 
 ffbuild_dockerdl() {
-    true
+    return 0
 }
 
 ffbuild_dockerlayer() {
@@ -27,11 +33,5 @@ ffbuild_dockerbuild() {
 }
 
 ffbuild_ldexeflags() {
-    echo '-pie'
-
-    if [[ $VARIANT == *shared* ]]; then
-        # Can't escape escape hell
-        echo -Wl,-rpath='\\\\\\\$\\\$ORIGIN'
-        echo -Wl,-rpath='\\\\\\\$\\\$ORIGIN/../lib'
-    fi
+    return 0
 }

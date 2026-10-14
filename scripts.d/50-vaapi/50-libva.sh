@@ -1,14 +1,14 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/intel/libva.git"
-SCRIPT_COMMIT="29fbbd8a913b2529cef8e63548093aa25c2669b8"
+SCRIPT_COMMIT="6b07f7100512817f736967e899b8c26313c20623"
+
+ffbuild_depends() {
+    echo base
+    echo x11
+}
 
 ffbuild_enabled() {
-    [[ $ADDINS_STR == *4.4* && $TARGET == win* ]] && return -1
-    [[ $ADDINS_STR == *5.0* && $TARGET == win* ]] && return -1
-    [[ $ADDINS_STR == *5.1* && $TARGET == win* ]] && return -1
-    [[ $ADDINS_STR == *6.0* && $TARGET == win* ]] && return -1
-    [[ $TARGET == linuxarm64 ]] && return -1
     return -1
 }
 
@@ -41,6 +41,17 @@ ffbuild_dockerbuild() {
             -Dwith_glx=no
             -Dwith_wayland=no
         )
+    elif [[ $TARGET == linuxarm64 ]]; then
+        myconf+=(
+            --cross-file=/cross.meson
+            --default-library=shared
+            --sysconfdir="/etc"
+            -Ddriverdir="/usr/lib/aarch64-linux-gnu/dri"
+            -Ddisable_drm=false
+            -Dwith_x11=yes
+            -Dwith_glx=no
+            -Dwith_wayland=no
+        )
     elif [[ $TARGET == win* ]]; then
         myconf+=(
             --cross-file=/cross.meson
@@ -53,7 +64,7 @@ ffbuild_dockerbuild() {
     fi
 
     export CFLAGS="$RAW_CFLAGS"
-    export LDFLAFS="$RAW_LDFLAGS"
+    export LDFLAGS="$RAW_LDFLAGS"
 
     meson "${myconf[@]}" ..
     ninja -j"$(nproc)"

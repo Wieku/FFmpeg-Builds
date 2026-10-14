@@ -1,18 +1,22 @@
 #!/bin/bash
 
-SCRIPT_REPO="https://github.com/glennrp/libpng.git"
-SCRIPT_COMMIT="134ab615b617f548e822d8857f1cfc0525aefeba"
+SCRIPT_REPO="https://github.com/libffi/libffi.git"
+SCRIPT_COMMIT="bc553867367246d140cd156f060bd0409f57f157"
 
 ffbuild_enabled() {
     return -1
 }
 
 ffbuild_dockerbuild() {
+    ./autogen.sh
+
     local myconf=(
         --prefix="$FFBUILD_PREFIX"
         --disable-shared
         --enable-static
         --with-pic
+        --disable-docs
+        --disable-multi-os-directory
     )
 
     if [[ $TARGET == win* || $TARGET == linux* ]]; then
@@ -23,8 +27,6 @@ ffbuild_dockerbuild() {
         echo "Unknown target"
         return -1
     fi
-
-    export CPPFLAGS="$CPPFLAGS -I$FFBUILD_PREFIX/include"
 
     ./configure "${myconf[@]}"
     make -j$(nproc)

@@ -39,6 +39,9 @@ IMAGE="${REGISTRY}/${REPO}/${TARGET}-${VARIANT}${ADDINS_STR:+-}${ADDINS_STR}:lat
 
 ffbuild_ffver() {
     case "$ADDINS_STR" in
+    *4.3*)
+        echo 403
+        ;;
     *4.4*)
         echo 404
         ;;
@@ -63,12 +66,22 @@ ffbuild_ffver() {
     *8.0*)
         echo 800
         ;;
+    *8.1*)
+        echo 801
+        ;;
+    *9.0*)
+        echo 900
+        ;;
     *)
         echo 99999999
         ;;
     esac
 }
 
+
+ffbuild_depends() {
+    echo base
+}
 
 ffbuild_dockerstage() {
     if [[ -n "$SELFCACHE" ]]; then

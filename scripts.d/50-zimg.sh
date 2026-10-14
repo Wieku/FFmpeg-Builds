@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/sekrit-twc/zimg.git"
-SCRIPT_COMMIT="0e56801f98db3e363c974fca794fa06022d40ee4"
+SCRIPT_COMMIT="67e0603271c080e22c8429856dd4a8a56587e61e"
 
 ffbuild_enabled() {
     return -1
@@ -13,6 +13,8 @@ ffbuild_dockerdl() {
 }
 
 ffbuild_dockerbuild() {
+    sed -i '1i #include <exception>' src/zimg/api/zimg.cpp
+
     ./autogen.sh
 
     local myconf=(

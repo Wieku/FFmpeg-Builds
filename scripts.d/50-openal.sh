@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/kcat/openal-soft.git"
-SCRIPT_COMMIT="f15e855145be2a6f82a73bf5ba1d94456668011c"
+SCRIPT_COMMIT="c89b8cf7bba4822f230c69f0a6696a52e5322dca"
 
 ffbuild_enabled() {
     (( $(ffbuild_ffver) > 501 )) || return -1
@@ -10,6 +10,9 @@ ffbuild_enabled() {
 
 ffbuild_dockerbuild() {
     mkdir cm_build && cd cm_build
+
+    export CFLAGS="$CFLAGS -include stdlib.h"
+    export CXXFLAGS="$CXXFLAGS -include cstdlib"
 
     cmake -DCMAKE_TOOLCHAIN_FILE="$FFBUILD_CMAKE_TOOLCHAIN" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$FFBUILD_PREFIX" \
         -DLIBTYPE=STATIC -DALSOFT_UTILS=OFF -DALSOFT_EXAMPLES=OFF  ..

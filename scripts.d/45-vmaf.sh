@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/Netflix/vmaf.git"
-SCRIPT_COMMIT="b9ac69e6c4231fad0465021f9e31a841a18261db"
+SCRIPT_COMMIT="86da14d0306a138fd3f01319860b905169746516"
 
 ffbuild_enabled() {
     return -1
@@ -10,6 +10,10 @@ ffbuild_enabled() {
 ffbuild_dockerbuild() {
     # Kill build of unused and broken tools
     echo > libvmaf/tools/meson.build
+
+    sed -i -E 's/([^.>:_[:alnum:]])swap\(/\1libsvm_swap(/g' libvmaf/src/svm.cpp
+    sed -i -E 's/([^.>:_[:alnum:]])min\(/\1libsvm_min(/g' libvmaf/src/svm.cpp
+    sed -i -E 's/([^.>:_[:alnum:]])max\(/\1libsvm_max(/g' libvmaf/src/svm.cpp
 
     mkdir build && cd build
 
@@ -20,9 +24,20 @@ ffbuild_dockerbuild() {
         -Dbuilt_in_models=true
         -Denable_tests=false
         -Denable_docs=false
-        -Denable_avx512=true
         -Denable_float=true
     )
+
+    if [[ $TARGET == *32 ]]; then
+        myconf+=(
+            -Denable_avx512=false
+            -Denable_asm=false
+        )
+    else
+        myconf+=(
+            -Denable_avx512=true
+            -Denable_asm=true
+        )
+    fi
 
     if [[ $TARGET == win* || $TARGET == linux* ]]; then
         myconf+=(
@@ -41,8 +56,7 @@ ffbuild_dockerbuild() {
 }
 
 ffbuild_configure() {
-    [[ $ADDINS_STR == *4.4* ]] && return 0
-    [[ $ADDINS_STR == *5.0* ]] && return 0
+    (( $(ffbuild_ffver) >= 501 )) || return 0
     echo --enable-libvmaf
 }
 

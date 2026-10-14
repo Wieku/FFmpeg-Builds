@@ -1,5 +1,6 @@
 ARG GH_REPO=ghcr.io/btbn/ffmpeg-builds
-FROM $GH_REPO/base:latest
+ARG BASE_TAG_SUFFIX=
+FROM $GH_REPO/base:latest${BASE_TAG_SUFFIX}
 
 RUN --mount=src=ct-ng-config,dst=/.config \
     git clone --filter=blob:none https://github.com/crosstool-ng/crosstool-ng.git /ct-ng && cd /ct-ng && \
@@ -13,11 +14,18 @@ RUN --mount=src=ct-ng-config,dst=/.config \
 
 # Prepare "cross" environment to heavily favour static builds
 RUN \
-    find /opt/ct-ng \
+    find /opt/ct-ng \( \
         -name "*.dll" \
         -or -name "*.dll.a" \
-        -delete && \
+        \) -delete && \
     mkdir /opt/ffbuild
+
+RUN \
+    dpkg --add-architecture i386 && \
+    apt-get -y update && \
+    apt-get -y install --no-install-recommends wine32 wine && \
+    apt-get -y clean autoclean && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV FFBUILD_TOOLCHAIN=i686-w64-mingw32 \
     FFBUILD_RUST_TARGET=i686-pc-windows-gnu

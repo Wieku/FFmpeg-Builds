@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/mm2/Little-CMS.git"
-SCRIPT_COMMIT="59feb9ec4995e3d59dc78ae1f2cb7643c193ccd1"
+SCRIPT_COMMIT="35cef8775e0ab46f0dda0b46aae1e69d27524432"
 
 ffbuild_enabled() {
     return -1
@@ -32,4 +32,13 @@ ffbuild_dockerbuild() {
     meson setup "${myconf[@]}" ..
     ninja -j$(nproc)
     DESTDIR="$FFBUILD_DESTDIR" ninja install
+}
+
+ffbuild_configure() {
+    echo --enable-lcms2
+}
+
+ffbuild_unconfigure() {
+    (( $(ffbuild_ffver) >= 501 )) || return 0
+    echo --disable-lcms2
 }

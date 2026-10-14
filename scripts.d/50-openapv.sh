@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/AcademySoftwareFoundation/openapv.git"
-SCRIPT_COMMIT="99e80816893e4b6c5fc57a2dda1141f037dd446c"
+SCRIPT_COMMIT="a58ce739be0dfb083643d929aee8f0e0ba9bdf63"
 
 ffbuild_enabled() {
     (( $(ffbuild_ffver) > 701 )) || return -1
@@ -30,8 +30,7 @@ ffbuild_dockerbuild() {
     make -j$(nproc)
     make install DESTDIR="$FFBUILD_DESTDIR"
 
-    mv "$FFBUILD_DESTPREFIX"/lib{/oapv/liboapv.a,}
-    rm -rf "$FFBUILD_DESTPREFIX"/{bin,lib/oapv,include/oapv/oapv_exports.h,lib/liboapv.so*}
+    rm -rf "$FFBUILD_DESTPREFIX"/{bin,lib/oapv,lib/import,include/oapv/oapv_exports.h,lib/liboapv.so*}
 
     {
         echo "Libs.private: -lm"

@@ -11,7 +11,7 @@ Linux builds are targetting RHEL/CentOS 8 (glibc-2.28 + linux-4.18) and anything
 
 Builds run daily at 12:00 UTC (or GitHubs idea of that time) and are automatically released on success.
 
-**Auto-Builds run ONLY for win64 and linux(arm)64. There are no win32/x86 auto-builds, though you can produce win32 builds yourself following the instructions below.**
+**Auto-Builds run ONLY for win(arm)64 and linux(arm)64. There are no win32/x86 auto-builds, though you can produce win32 builds yourself following the instructions below.**
 
 ### Release Retention Policy
 
@@ -63,6 +63,6 @@ Available variants:
 * `nonfree-shared` Same again, but with the nonfree set of dependencies.
 
 All of those can be optionally combined with any combination of addins:
-* `4.4`/`5.0`/`5.1`/`6.0`/`6.1`/`7.0`/`7.1` to build from the respective release branch instead of master.
+* `4.4`/`5.0`/`5.1`/`6.0`/`6.1`/`7.0`/`7.1`/`8.0`/`8.1`/`9.0` to build from the respective release branch instead of master.
 * `debug` to not strip debug symbols from the binaries. This increases the output size by about 250MB.
 * `lto` build all dependencies and ffmpeg with -flto=auto (HIGHLY EXPERIMENTAL, broken for Windows, sometimes works for Linux)
