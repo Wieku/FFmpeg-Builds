@@ -2,7 +2,6 @@ FF_CONFIGURE="--enable-gpl --enable-version3 --disable-debug
 --disable-autodetect
 
 --disable-ffplay
---disable-postproc
 
 --enable-nvenc
 --enable-amf
