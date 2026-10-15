@@ -4,8 +4,7 @@ SCRIPT_REPO="https://github.com/AcademySoftwareFoundation/openapv.git"
 SCRIPT_COMMIT="a58ce739be0dfb083643d929aee8f0e0ba9bdf63"
 
 ffbuild_enabled() {
-    (( $(ffbuild_ffver) > 701 )) || return -1
-    return 0
+    return -1
 }
 
 ffbuild_dockerdl() {
